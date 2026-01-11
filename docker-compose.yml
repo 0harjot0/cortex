@@ -1,0 +1,63 @@
+services:
+  backend-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: zynapse-backend-api
+    env_file:
+      - path: ./backend/.env
+        required: false
+    command: python -m main
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - zynapse-net
+
+  backend-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: zynapse-backend-worker
+    env_file:
+      - path: ./backend/.env
+        required: false
+    command: dramatiq worker
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - zynapse-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: zynapse-redis
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - zynapse-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: zynapse-frontend
+    env_file:
+      - path: ./frontend/.env
+        required: false
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      - zynapse-net
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  zynapse-net:
+    driver: bridge

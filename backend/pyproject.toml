@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "zynapse-app-backend"
+version = "0.1.0"
+description = "Backend for zynapse project"
+authors = ["Subodh s.subodh7976@gmail.com"]
+readme = "README.md"
+package-mode = false
+
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.14"
+fastapi = ">=0.115.12,<0.116.0"
+uvicorn = {extras = ["standard"], version = ">=0.34.2,<0.35.0"}
+langchain = ">=0.3.23,<0.4.0"
+langchain-mcp-adapters = "^0.0.9"
+langchain-openai = "^0.3.14"
+langgraph = "^0.3.31"
+psycopg2-binary = "^2.9.10"
+python-multipart = "^0.0.20"
+sqlalchemy = "^2.0.40"
+aiofiles = "^24.1.0"
+apscheduler = "^3.11.0"
+python-dotenv = "^1.1.0"
+pymupdf4llm = "^0.0.21"
+curl-cffi = "^0.10.0"
+markdownify = "^1.1.0"
+youtube-transcript-api = "^1.0.3"
+pytube = "^15.0.0"
+langchain-google-genai = "^2.1.3"
+redis = "^5.2.1"
+dramatiq = "^1.17.1"
+duckduckgo-mcp-server = "^0.1.1"
+langchain-mcp-tools = "^0.2.3"
+arxiv-paper-mcp = "^0.1.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+httpx = "^0.28.1"
+ruff = "^0.11.6"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
